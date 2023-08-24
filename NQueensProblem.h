@@ -23,4 +23,9 @@ typedef struct Position
     int row, col;
 } Position;
 
+bool initChessboard(Chessboard *board, const int size);
+void emptyChessboard(Chessboard *board);
+void freeChessboard(Chessboard *board);
+void printChessboard(Chessboard *board);
+
 #endif // NQUEENSPROBLEM_H
