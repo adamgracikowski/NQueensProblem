@@ -1,0 +1,4 @@
+#ifndef NQUEENSPROBLEM_H
+#define NQUEENSPROBLEM_H
+
+#endif // NQUEENSPROBLEM_H
