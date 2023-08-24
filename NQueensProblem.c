@@ -71,14 +71,14 @@ void printChessboard(Chessboard *board)
     }
 }
 
-bool isValidPositionForQueen(const Position p, Chessboard *board)
+bool isValidPositionForQueen(const Position p, const Chessboard *board)
 {
     return (!isQueenInRow(p, board) &&
             !isQueenInLowerDiagonal(p, board) &&
             !isQueenInUpperDiagonal(p, board));
 }
 
-bool isQueenInRow(const Position p, Chessboard *board)
+bool isQueenInRow(const Position p, const Chessboard *board)
 {
     for (int i = 0; i < p.col; ++i)
     {
@@ -88,7 +88,7 @@ bool isQueenInRow(const Position p, Chessboard *board)
     return false;
 }
 
-bool isQueenInLowerDiagonal(const Position p, Chessboard *board)
+bool isQueenInLowerDiagonal(const Position p, const Chessboard *board)
 {
     for (int row = p.row, col = p.col; col >= 0 && row < board->size; row++, col--)
         if (board->fields[row][col] == QUEEN)
@@ -96,7 +96,7 @@ bool isQueenInLowerDiagonal(const Position p, Chessboard *board)
     return false;
 }
 
-bool isQueenInUpperDiagonal(const Position p, Chessboard *board)
+bool isQueenInUpperDiagonal(const Position p, const Chessboard *board)
 {
     for (int row = p.row, col = p.col; row >= 0 && col >= 0; row--, col--)
         if (board->fields[row][col] == QUEEN)

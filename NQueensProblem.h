@@ -45,10 +45,10 @@ void emptyChessboard(Chessboard *board);
 void freeChessboard(Chessboard *board);
 void printChessboard(Chessboard *board);
 
-bool isValidPositionForQueen(const Position p, Chessboard *board);
-bool isQueenInRow(const Position p, Chessboard *board);
-bool isQueenInLowerDiagonal(const Position p, Chessboard *board);
-bool isQueenInUpperDiagonal(const Position p, Chessboard *board);
+bool isValidPositionForQueen(const Position p, const Chessboard *board);
+bool isQueenInRow(const Position p, const Chessboard *board);
+bool isQueenInLowerDiagonal(const Position p, const Chessboard *board);
+bool isQueenInUpperDiagonal(const Position p, const Chessboard *board);
 bool solveNQueenProblem(const int size);
 bool backtracing(const int column, Chessboard *board);
 
