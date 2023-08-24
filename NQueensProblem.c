@@ -70,3 +70,89 @@ void printChessboard(Chessboard *board)
         printf("\n");
     }
 }
+
+bool isValidPositionForQueen(const Position p, Chessboard *board)
+{
+    return (!isQueenInRow(p, board) &&
+            !isQueenInLowerDiagonal(p, board) &&
+            !isQueenInUpperDiagonal(p, board));
+}
+
+bool isQueenInRow(const Position p, Chessboard *board)
+{
+    for (int i = 0; i < p.col; ++i)
+    {
+        if (board->fields[p.row][i] == QUEEN)
+            return true;
+    }
+    return false;
+}
+
+bool isQueenInLowerDiagonal(const Position p, Chessboard *board)
+{
+    for (int row = p.row, col = p.col; col >= 0 && row < board->size; row++, col--)
+        if (board->fields[row][col] == QUEEN)
+            return true;
+    return false;
+}
+
+bool isQueenInUpperDiagonal(const Position p, Chessboard *board)
+{
+    for (int row = p.row, col = p.col; row >= 0 && col >= 0; row--, col--)
+        if (board->fields[row][col] == QUEEN)
+            return true;
+    return false;
+}
+
+bool solveNQueenProblem(const int size)
+{
+    assert(size > 0);
+
+    Chessboard board;
+    if (!initChessboard(&board, size))
+    {
+        perror("Not enough memory.\n");
+        return false;
+    }
+
+    bool result;
+    Position start = {rand() % size, 0};
+    for (int i = 0; i < size; ++i)
+    {
+        board.fields[(start.row + i) % size][0] = QUEEN;
+        if ((result = backtracing(1, &board)))
+        {
+            ANIMATION(, ANIMATION_DELAY);
+            printChessboard(&board);
+            printf("Solution found.\n");
+            freeChessboard(&board);
+            return true;
+        }
+        else
+            board.fields[(start.row + i) % size][0] = EMPTY;
+    }
+
+    printf("Solution not found.\n");
+    freeChessboard(&board);
+    return false;
+}
+
+bool backtracing(const int column, Chessboard *board)
+{
+    ANIMATION(printChessboard(board), ANIMATION_DELAY);
+    int size = board->size;
+    if (column == size)
+        return true;
+
+    for (int i = 0; i < size; ++i)
+    {
+        if (isValidPositionForQueen((Position){i, column}, board))
+        {
+            board->fields[i][column] = QUEEN;
+            if (backtracing(column + 1, board))
+                return true;
+            board->fields[i][column] = EMPTY;
+        }
+    }
+    return false;
+}

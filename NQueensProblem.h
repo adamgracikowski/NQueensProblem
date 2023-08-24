@@ -12,6 +12,17 @@
 #define QUEEN 'Q'
 #define EMPTY ' ' // space
 
+#define INTERACTIVE_PRINT 1
+// #define INTERACTIVE_PRINT 0 // uncomment this line and comment the line above to disable the animation
+#define ANIMATION_DELAY 500
+#define ANIMATION(instruction, delay) \
+    if (INTERACTIVE_PRINT)            \
+    {                                 \
+        Sleep(delay);                 \
+        if (system("cls"))            \
+            system("clear");          \
+        instruction;                  \
+    }
 typedef struct Chessboard
 {
     int size;
@@ -27,5 +38,12 @@ bool initChessboard(Chessboard *board, const int size);
 void emptyChessboard(Chessboard *board);
 void freeChessboard(Chessboard *board);
 void printChessboard(Chessboard *board);
+
+bool isValidPositionForQueen(const Position p, Chessboard *board);
+bool isQueenInRow(const Position p, Chessboard *board);
+bool isQueenInLowerDiagonal(const Position p, Chessboard *board);
+bool isQueenInUpperDiagonal(const Position p, Chessboard *board);
+bool solveNQueenProblem(const int size);
+bool backtracing(const int column, Chessboard *board);
 
 #endif // NQUEENSPROBLEM_H
