@@ -37,7 +37,7 @@ The main idea of the algorithm is to place queens one by one in different column
 `bool isValidPositionForQueen(const Position p, Chessboard *board)` is responsible for deciding whether a queen can be placed in a position `p` or not. 
 The idea of filling the chessboard column by column allows the `isValidPositionForQueen` function to check only columns to the left of the currently processed column.
 
-`bool solveNQueenProblem(const int size)` use a self-implemented square array `Chessboard` (with **dynamic memory allocation**) to represent the chessboard.
+`solveNQueenProblem`function uses a self-implemented square array `Chessboard` (with **dynamic memory allocation**) to represent the chessboard.
 
 ```cpp
 typedef struct Chessboard
